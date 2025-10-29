@@ -1,5 +1,6 @@
 volumes:
   postgres-data:
+    driver: local
 
 services:
   app:
