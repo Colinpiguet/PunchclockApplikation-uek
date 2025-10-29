@@ -25,12 +25,10 @@ public class EntryService {
         return query.getResultList();
     }
 
-@Transactional
+    @Transactional
     public void deleteEntry(Long id) {
         Entry entry = entityManager.find(Entry.class, id);
-        if (entry != null) {
-            entityManager.remove(entry);
-        }
+        entityManager.remove(entry);
     }
 
     @Transactional

@@ -1,10 +1,10 @@
 package ch.zli.m223.model;
 
 import jakarta.persistence.*;
-
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Entry {
@@ -18,6 +18,17 @@ public class Entry {
 
   @Column(nullable = false)
   private LocalDateTime checkOut;
+
+  @ManyToOne
+  private category category;
+
+  @ManyToMany
+  @JoinTable(
+    name = "entry_tag",
+    joinColumns = @JoinColumn(name = "entry_id"),
+    inverseJoinColumns = @JoinColumn(name = "tag_id")
+  )
+  private List<tag> tags;
 
   public Long getId() {
     return id;
@@ -41,5 +52,21 @@ public class Entry {
 
   public void setCheckOut(LocalDateTime checkOut) {
     this.checkOut = checkOut;
+  }
+
+  public category getCategory() {
+    return category;
+  }
+
+  public void setCategory(category category) {
+    this.category = category;
+  }
+
+  public List<tag> getTags() {
+    return tags;
+  }
+
+  public void setTags(List<tag> tags) {
+    this.tags = tags;
   }
 }
